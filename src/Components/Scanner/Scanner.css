@@ -1,0 +1,18 @@
+.startScan, .ninjaHead{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.startScan {
+    border-radius: 100%;
+    border: none;
+    background:none;
+}
+
+.startScan:hover {
+    cursor: pointer;
+}
+
+.container {
+    display: grid;
+}

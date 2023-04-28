@@ -1,17 +1,14 @@
-import whiteBelt from './whiteBelt.png';
 import './App.css';
-import Scanner from './Components/Scanner';
+import Scanner from './Components/Scanner/Scanner.js';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={whiteBelt} className="ninjaHead"/>
+        <Scanner />
         <p>
           Scan your belt Ninja!
         </p>
-        <Scanner />
-
       </header>
     </div>
   );
