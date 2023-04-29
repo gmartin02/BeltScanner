@@ -6,9 +6,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Scanner />
-        <p>
-          Scan your belt Ninja!
-        </p>
       </header>
     </div>
   );

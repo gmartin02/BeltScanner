@@ -16,3 +16,13 @@
 .container {
     display: grid;
 }
+
+.text {
+    font-family: 'azo-sans-web',Helvetica,sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.input {
+    z-index: 1;
+}
