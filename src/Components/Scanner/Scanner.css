@@ -23,6 +23,13 @@
     text-transform: uppercase;
 }
 
-.input {
-    z-index: 1;
+.name {
+    width: 1px;
+    position: absolute;
+    background-color: #282c34;
+    color: #282c34;
+    border-color: #282c34;
+    top: 50%;
+    right: 50%;
+    z-index: -1;
 }
