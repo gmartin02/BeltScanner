@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify951cd0cb6a844-staging-175455-authRole",
+      "UnauthRoleArn": "arn:aws:iam::450298687886:role/amplify-amplify951cd0cb6a844-staging-175455-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::450298687886:role/amplify-amplify951cd0cb6a844-staging-175455-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-amplify951cd0cb6a844-staging-175455-deployment",
+      "UnauthRoleName": "amplify-amplify951cd0cb6a844-staging-175455-unauthRole",
+      "StackName": "amplify-amplify951cd0cb6a844-staging-175455",
+      "StackId": "arn:aws:cloudformation:us-east-2:450298687886:stack/amplify-amplify951cd0cb6a844-staging-175455/9559e170-016e-11ee-a59e-0a6948e539c5",
+      "AmplifyAppId": "d24z9w5u86ekc9"
+    },
+    "categories": {
+      "auth": {
+        "beltscanner5c990122": {}
+      }
+    }
+  }
+}
