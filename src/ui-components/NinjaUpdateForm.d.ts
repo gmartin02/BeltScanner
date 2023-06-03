@@ -14,18 +14,18 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type NinjaUpdateFormInputValues = {
-    name?: string;
     belt?: string;
+    name?: string;
 };
 export declare type NinjaUpdateFormValidationValues = {
-    name?: ValidationFunction<string>;
     belt?: ValidationFunction<string>;
+    name?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NinjaUpdateFormOverridesProps = {
     NinjaUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    name?: PrimitiveOverrideProps<TextFieldProps>;
     belt?: PrimitiveOverrideProps<TextFieldProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NinjaUpdateFormProps = React.PropsWithChildren<{
     overrides?: NinjaUpdateFormOverridesProps | undefined | null;

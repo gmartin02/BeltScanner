@@ -24,18 +24,18 @@ export default function NinjaUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    name: "",
     belt: "",
+    name: "",
   };
-  const [name, setName] = React.useState(initialValues.name);
   const [belt, setBelt] = React.useState(initialValues.belt);
+  const [name, setName] = React.useState(initialValues.name);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = ninjaRecord
       ? { ...initialValues, ...ninjaRecord }
       : initialValues;
-    setName(cleanValues.name);
     setBelt(cleanValues.belt);
+    setName(cleanValues.name);
     setErrors({});
   };
   const [ninjaRecord, setNinjaRecord] = React.useState(ninjaModelProp);
@@ -50,8 +50,8 @@ export default function NinjaUpdateForm(props) {
   }, [beltProp, ninjaModelProp]);
   React.useEffect(resetStateValues, [ninjaRecord]);
   const validations = {
-    name: [{ type: "Required" }],
     belt: [{ type: "Required" }],
+    name: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -79,8 +79,8 @@ export default function NinjaUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          name,
           belt,
+          name,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -128,31 +128,6 @@ export default function NinjaUpdateForm(props) {
       {...rest}
     >
       <TextField
-        label="Name"
-        isRequired={true}
-        isReadOnly={false}
-        value={name}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name: value,
-              belt,
-            };
-            const result = onChange(modelFields);
-            value = result?.name ?? value;
-          }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
-          }
-          setName(value);
-        }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
-      ></TextField>
-      <TextField
         label="Belt"
         isRequired={true}
         isReadOnly={true}
@@ -161,8 +136,8 @@ export default function NinjaUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              name,
               belt: value,
+              name,
             };
             const result = onChange(modelFields);
             value = result?.belt ?? value;
@@ -176,6 +151,31 @@ export default function NinjaUpdateForm(props) {
         errorMessage={errors.belt?.errorMessage}
         hasError={errors.belt?.hasError}
         {...getOverrideProps(overrides, "belt")}
+      ></TextField>
+      <TextField
+        label="Name"
+        isRequired={true}
+        isReadOnly={false}
+        value={name}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              belt,
+              name: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.name ?? value;
+          }
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
+          }
+          setName(value);
+        }}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <Flex
         justifyContent="space-between"

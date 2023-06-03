@@ -4,11 +4,12 @@
 export const getNinja = /* GraphQL */ `
   query GetNinja($belt: String!) {
     getNinja(belt: $belt) {
+      belt
       id
       name
-      belt
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -28,11 +29,12 @@ export const listNinjas = /* GraphQL */ `
       sortDirection: $sortDirection
     ) {
       items {
+        belt
         id
         name
-        belt
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

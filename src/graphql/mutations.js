@@ -7,11 +7,12 @@ export const createNinja = /* GraphQL */ `
     $condition: ModelNinjaConditionInput
   ) {
     createNinja(input: $input, condition: $condition) {
+      belt
       id
       name
-      belt
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -21,11 +22,12 @@ export const updateNinja = /* GraphQL */ `
     $condition: ModelNinjaConditionInput
   ) {
     updateNinja(input: $input, condition: $condition) {
+      belt
       id
       name
-      belt
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -35,11 +37,12 @@ export const deleteNinja = /* GraphQL */ `
     $condition: ModelNinjaConditionInput
   ) {
     deleteNinja(input: $input, condition: $condition) {
+      belt
       id
       name
-      belt
       createdAt
       updatedAt
+      owner
     }
   }
 `;

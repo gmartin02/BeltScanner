@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Scanner.css';
 import whiteBelt from './whiteBelt.png';
 //import Welcome from '../Welcome/Welcome'
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import { listNinjas, getNinja } from '../../graphql/queries';
 import {
     createNinja as createNinjaMutation,
@@ -20,7 +20,7 @@ import {
 function Scanner () {
     const [ninjas, setNinjas] = useState([]);
     const [message, setMessage] = useState("");
-    const [search, setSearch] = useState("");
+    const [owner, setOwner] = useState("");
 
 
 
@@ -30,19 +30,22 @@ function Scanner () {
     }, []);
 
     async function fetchNinjas() {
-        const apiData = await API.graphql({ query: listNinjas });
+        const apiData = await API.graphql({ query: listNinjas});
         const ninjasFromAPI = apiData.data.listNinjas.items;
         setNinjas(ninjasFromAPI);
-        console.log(ninjas)
+        console.log(ninjasFromAPI)
+        let user = await Auth.currentUserInfo()
+        console.log(user.username)
+        setOwner(user.username)
     }
 
-    async function oneNinja({Sbelt}) {
-        let ninja = await API.graphql({
+    async function searchNinja(Sbelt) {
+        // Get a specific item
+        const oneNinja = await API.graphql({
             query: getNinja,
             variables: { belt: Sbelt }
         });
-        setSearch(ninja)
-        console.log(ninja)
+        console.log(oneNinja.data.getNinja.name)
     }
 
     async function createNinja(event) {
@@ -81,8 +84,7 @@ function Scanner () {
         document.getElementById("text").innerHTML = "Scanning...";
         delay(3000);
         //let currentBelt = document.getElementById("id").value;
-        oneNinja("12")
-        console.log(search)
+        searchNinja("12");
     }   
 
     return (
@@ -118,7 +120,11 @@ function Scanner () {
             </View>
 
             <View margin="3rem 0">
-                {ninjas.map((ninja) => (
+                {ninjas.map((ninja) => 
+                
+                (ninja.owner === owner) ?
+                
+                (
                 <Flex
                     key={ninja.belt || ninja.name}
                     direction="row"
@@ -133,7 +139,7 @@ function Scanner () {
                         Delete ninja
                     </Button>
                 </Flex>
-                ))}
+                ): (<></>))}
             </View>
         </div>
     );
