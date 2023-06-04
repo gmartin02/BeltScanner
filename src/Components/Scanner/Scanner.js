@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Scanner.css';
 import whiteBelt from './whiteBelt.png';
 //import Welcome from '../Welcome/Welcome'
@@ -19,11 +19,9 @@ import {
 
 function Scanner () {
     const [ninjas, setNinjas] = useState([]);
-    const [message, setMessage] = useState("");
     const [owner, setOwner] = useState("");
 
-
-
+    const inputRef = useRef(null);
 
     useEffect(() => {
         fetchNinjas();
@@ -33,19 +31,28 @@ function Scanner () {
         const apiData = await API.graphql({ query: listNinjas});
         const ninjasFromAPI = apiData.data.listNinjas.items;
         setNinjas(ninjasFromAPI);
-        console.log(ninjasFromAPI)
         let user = await Auth.currentUserInfo()
-        console.log(user.username)
         setOwner(user.username)
     }
 
     async function searchNinja(Sbelt) {
         // Get a specific item
+        try {
         const oneNinja = await API.graphql({
             query: getNinja,
             variables: { belt: Sbelt }
         });
-        console.log(oneNinja.data.getNinja.name)
+
+        if(oneNinja.data.getNinja) {
+            welcome();
+        } else {
+            alert("Ninja not found, please try again!")
+            document.getElementById("input").value = "";
+        }
+        
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     async function createNinja(event) {
@@ -72,27 +79,24 @@ function Scanner () {
         });
       }
 
-    const delay = (duration) =>
-        new Promise(resolve => setTimeout(resolve, duration));
-
-    const handleChange = (event) => {
-        setMessage(event.target.value);
-        console.log(message)
-    };
-
     const scanNFC = async () => {
         document.getElementById("text").innerHTML = "Scanning...";
-        delay(3000);
-        //let currentBelt = document.getElementById("id").value;
-        searchNinja("12");
+        inputRef.current.focus()
+        //delay(3000, searchNinja(document.getElementById("input").value));
+        setTimeout(() => searchNinja(document.getElementById("input").value), 2000);
+        
     }   
+
+    const welcome = () => {
+
+    }
 
     return (
         <div className='container'>
             <img src={whiteBelt} className="ninjaHead" alt=''/>
             <button onClick={scanNFC} className='startScan'></button>
             <p className='text' id="text">Scan your belt Ninja!</p>
-            <input id="input" className='name' type='text' autoFocus onChange={handleChange}></input>
+            <input id="input" className='name' type='text' autoFocus ref={inputRef}></input>
             
             
             <View as="form" margin="3rem 0" onSubmit={createNinja}>
@@ -139,7 +143,7 @@ function Scanner () {
                         Delete ninja
                     </Button>
                 </Flex>
-                ): (<></>))}
+                ): (<p key={ninja.belt || ninja.name}></p>))}
             </View>
         </div>
     );

@@ -13,7 +13,7 @@ import {
 function App({ signOut }) {
   return (
     <div className="App">
-      <header className="App-header">
+        <header className="App-header">
         <Scanner />
         <Button onClick={signOut}>Sign Out</Button>
       </header>
