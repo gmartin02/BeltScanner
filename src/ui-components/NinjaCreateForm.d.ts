@@ -15,16 +15,19 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type NinjaCreateFormInputValues = {
     belt?: string;
     name?: string;
+    dojo?: string;
 };
 export declare type NinjaCreateFormValidationValues = {
     belt?: ValidationFunction<string>;
     name?: ValidationFunction<string>;
+    dojo?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NinjaCreateFormOverridesProps = {
     NinjaCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     belt?: PrimitiveOverrideProps<TextFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
+    dojo?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NinjaCreateFormProps = React.PropsWithChildren<{
     overrides?: NinjaCreateFormOverridesProps | undefined | null;

@@ -25,18 +25,22 @@ export default function NinjaCreateForm(props) {
   const initialValues = {
     belt: "",
     name: "",
+    dojo: "",
   };
   const [belt, setBelt] = React.useState(initialValues.belt);
   const [name, setName] = React.useState(initialValues.name);
+  const [dojo, setDojo] = React.useState(initialValues.dojo);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setBelt(initialValues.belt);
     setName(initialValues.name);
+    setDojo(initialValues.dojo);
     setErrors({});
   };
   const validations = {
     belt: [{ type: "Required" }],
     name: [{ type: "Required" }],
+    dojo: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -66,6 +70,7 @@ export default function NinjaCreateForm(props) {
         let modelFields = {
           belt,
           name,
+          dojo,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -122,6 +127,7 @@ export default function NinjaCreateForm(props) {
             const modelFields = {
               belt: value,
               name,
+              dojo,
             };
             const result = onChange(modelFields);
             value = result?.belt ?? value;
@@ -147,6 +153,7 @@ export default function NinjaCreateForm(props) {
             const modelFields = {
               belt,
               name: value,
+              dojo,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -160,6 +167,32 @@ export default function NinjaCreateForm(props) {
         errorMessage={errors.name?.errorMessage}
         hasError={errors.name?.hasError}
         {...getOverrideProps(overrides, "name")}
+      ></TextField>
+      <TextField
+        label="Dojo"
+        isRequired={true}
+        isReadOnly={false}
+        value={dojo}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              belt,
+              name,
+              dojo: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.dojo ?? value;
+          }
+          if (errors.dojo?.hasError) {
+            runValidationTasks("dojo", value);
+          }
+          setDojo(value);
+        }}
+        onBlur={() => runValidationTasks("dojo", dojo)}
+        errorMessage={errors.dojo?.errorMessage}
+        hasError={errors.dojo?.hasError}
+        {...getOverrideProps(overrides, "dojo")}
       ></TextField>
       <Flex
         justifyContent="space-between"

@@ -61,7 +61,7 @@ export default function NavBar(props) {
           onClick={() => {
             whiteOneOnClick();
           }}
-          {...getOverrideProps(overrides, "white1")}
+          {...getOverrideProps(overrides, "white 1")}
         ></Image>
       </Flex>
       <Flex

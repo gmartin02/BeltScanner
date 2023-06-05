@@ -7,6 +7,7 @@ export const getNinja = /* GraphQL */ `
       belt
       id
       name
+      dojo
       createdAt
       updatedAt
       owner
@@ -32,6 +33,7 @@ export const listNinjas = /* GraphQL */ `
         belt
         id
         name
+        dojo
         createdAt
         updatedAt
         owner

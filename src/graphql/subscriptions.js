@@ -10,6 +10,7 @@ export const onCreateNinja = /* GraphQL */ `
       belt
       id
       name
+      dojo
       createdAt
       updatedAt
       owner
@@ -25,6 +26,7 @@ export const onUpdateNinja = /* GraphQL */ `
       belt
       id
       name
+      dojo
       createdAt
       updatedAt
       owner
@@ -40,6 +42,7 @@ export const onDeleteNinja = /* GraphQL */ `
       belt
       id
       name
+      dojo
       createdAt
       updatedAt
       owner

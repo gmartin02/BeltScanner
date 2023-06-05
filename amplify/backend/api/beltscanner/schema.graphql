@@ -2,4 +2,5 @@ type Ninja @model @auth(rules: [{allow: owner}, {allow: private}]) {
   belt: String! @primaryKey
   id: ID!
   name: String!
+  dojo: String!
 } 
