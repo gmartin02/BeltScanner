@@ -17,28 +17,28 @@ function Scanner () {
         });
 
         if(oneNinja.data.getNinja) {
-            welcome();
+            console.log("We are in")
         } else {
             alert("Ninja not found, please try again!")
             document.getElementById("input").value = "";
+            document.getElementById("text").innerHTML = "Scan your belt Ninja!";
+            inputRef.current.focus()
         }
         
         } catch (err) {
             console.log(err);
+            alert("Please scan a belt to continue!")
+            document.getElementById("text").innerHTML = "Scan your belt Ninja!";
+            inputRef.current.focus()
+
         }
     }
 
     const scanNFC = async () => {
         document.getElementById("text").innerHTML = "Scanning...";
         inputRef.current.focus()
-        //delay(3000, searchNinja(document.getElementById("input").value));
-        setTimeout(() => searchNinja(document.getElementById("input").value), 2000);
-        
+        setTimeout(() => searchNinja(document.getElementById("input").value), 2000);        
     }   
-
-    const welcome = () => {
-
-    }
 
     return (
         <div className='container'>
